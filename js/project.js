@@ -17,6 +17,7 @@ function addProject(event) {
     let type = document.getElementById('input-type').checked
 
     let image = document.getElementById('input-image').files
+    let projectDuration = getDuration(start, end)
 
 
     if(node){
@@ -52,6 +53,8 @@ function addProject(event) {
         next: next,
         type: type,
         image: image,
+        duration: projectDuration
+
     }
 
     projects.push(project)
@@ -75,7 +78,7 @@ function renderProject() {
         <h4 class="project-name">
             <a href="detail-project.html">${projects[dataProject].name}</a>
         </h4>
-        <p class="durasi">${projects[dataProject].duration}</p>
+        <p class="durasi">Durasi :${projects[dataProject].duration}</p>
         <p class="description">${projects[dataProject].description}</p>
         <i class="${projects[dataProject].node}"></i>
         <i class="${projects[dataProject].react}"></i>
@@ -88,4 +91,24 @@ function renderProject() {
     </div>
     `
     }
+}
+
+function getDuration(start, end){
+    let sdate = new Date (start)
+    let edate = new Date (end)
+    let duration = edate.getTime() - sdate.getTime()
+    let month = Math.floor (duration/(1000 * 3600 * 24 * 30))    
+    let day = duration / (1000 * 3600 * 24)
+
+    
+    if (day < 30) {
+        return day + ' Hari'
+    } else if (day > 30 && day<= 30) {
+        return day + ' Hari'
+    } else if (month < 12){
+        return month + ' Bulan'
+    }
+
+
+
 }
